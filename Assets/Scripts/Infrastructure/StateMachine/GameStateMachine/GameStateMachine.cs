@@ -4,6 +4,7 @@ using Infrastructure.DI;
 using Infrastructure.Factory.GameFactory;
 using Infrastructure.StateMachine.GameStateMachine.States;
 using Services.InputService;
+using Services.SceneLoader;
 
 namespace Infrastructure.StateMachine.GameStateMachine
 {
@@ -12,13 +13,13 @@ namespace Infrastructure.StateMachine.GameStateMachine
         private Dictionary<Type, IState> _states;
         private IState _activeState;
 
-        public GameStateMachine()
+        public GameStateMachine(ICoroutineRunner coroutineRunner, SimpleDI simpleDi)
         {
             _states = new Dictionary<Type, IState>()
             {
-                [typeof(BootstrapState)] = new BootstrapState(this),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, SimpleDI.Container.Single<IGameFactory>()),
-                [typeof(GameLoopState)] = new GameLoopState(this, SimpleDI.Container.Single<IInputService>()),
+                [typeof(BootstrapState)] = new BootstrapState(this, coroutineRunner),
+                [typeof(LoadLevelState)] = new LoadLevelState(this, simpleDi.Single<IGameFactory>(), simpleDi.Single<ISceneLoader>()),
+                [typeof(GameLoopState)] = new GameLoopState(this, simpleDi.Single<IInputService>()),
             };
         }
 

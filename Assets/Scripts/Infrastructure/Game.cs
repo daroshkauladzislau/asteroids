@@ -1,3 +1,4 @@
+using Infrastructure.DI;
 using Infrastructure.StateMachine.GameStateMachine;
 using Infrastructure.StateMachine.GameStateMachine.States;
 
@@ -7,9 +8,9 @@ namespace Infrastructure
     {
         public IGameStateMachine GameStateMachine;
 
-        public Game()
+        public Game(ICoroutineRunner coroutineRunner, SimpleDI simpleDi)
         {
-            GameStateMachine = new GameStateMachine();
+            GameStateMachine = new GameStateMachine(coroutineRunner, simpleDi);
             GameStateMachine.Enter<BootstrapState>();
         }
     }

@@ -31,8 +31,7 @@ namespace Game.Player.PlayerMove
             ship.transform.position = _playerMoveModel.CurrentPosition;
             ControlSpeedCurve();
         }
-
-
+        
         private void ControlSpeedCurve()
         {
             if (PlayerStartInputForMove())
