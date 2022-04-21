@@ -1,6 +1,7 @@
+using Infrastructure.AssetProvider;
 using Infrastructure.DI;
+using Infrastructure.Factory.GameFactory;
 using Services.InputService;
-using UnityEngine;
 
 namespace Infrastructure.StateMachine.GameStateMachine.States
 {
@@ -17,7 +18,7 @@ namespace Infrastructure.StateMachine.GameStateMachine.States
 
         public void Enter()
         {
-            
+            _gameStateMachine.Enter<LoadLevelState>();
         }
 
         public void Exit()
@@ -28,6 +29,9 @@ namespace Infrastructure.StateMachine.GameStateMachine.States
         private void RegisterServices()
         {
             RegisterInputService();
+            
+            SimpleDI.Container.RegisterSingle<IAssetProvider>(new AssetProvider.AssetProvider());
+            SimpleDI.Container.RegisterSingle<IGameFactory>(new GameFactory(SimpleDI.Container.Single<IAssetProvider>(), SimpleDI.Container.Single<IInputService>()));
         }
 
         private void RegisterInputService()

@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using Infrastructure.DI;
+using Infrastructure.Factory.GameFactory;
 using Infrastructure.StateMachine.GameStateMachine.States;
+using Services.InputService;
 
 namespace Infrastructure.StateMachine.GameStateMachine
 {
@@ -14,6 +17,8 @@ namespace Infrastructure.StateMachine.GameStateMachine
             _states = new Dictionary<Type, IState>()
             {
                 [typeof(BootstrapState)] = new BootstrapState(this),
+                [typeof(LoadLevelState)] = new LoadLevelState(this, SimpleDI.Container.Single<IGameFactory>()),
+                [typeof(GameLoopState)] = new GameLoopState(this, SimpleDI.Container.Single<IInputService>()),
             };
         }
 

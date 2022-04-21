@@ -1,14 +1,17 @@
+using GameConfig;
 using UnityEngine;
 
 namespace Infrastructure.AssetProvider
 {
     public class AssetProvider : IAssetProvider
     {
-        private const string PlayerShipPrefabPath = "";
+        private const string PlayerShipPrefabPath = "Prefabs/Game/PlayerShip";
+        private const string PlayerConfigPath = "Configs/Game/Player/PlayerConfig";
 
-        public GameObject PlayerShipObject()
-        {
-            return Resources.Load<GameObject>(PlayerShipPrefabPath);
-        }
+        public GameObject PlayerShipObject() => 
+            Resources.Load<GameObject>(PlayerShipPrefabPath);
+
+        public PlayerConfig PlayerConfig() => 
+            Resources.Load<PlayerConfig>(PlayerConfigPath);
     }
 }
