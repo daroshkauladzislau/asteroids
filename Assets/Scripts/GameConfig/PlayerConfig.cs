@@ -7,5 +7,7 @@ namespace GameConfig
     {
         public float MaxSpeed;
         public AnimationCurve AccelerationCurve;
+
+        public float RotationSpeed;
     }
 }
