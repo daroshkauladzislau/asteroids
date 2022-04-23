@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08a7037ad334440d83fdb1bc6db739e7, type: 3}
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
-  MaxSpeed: 50
+  MaxSpeed: 10
   AccelerationCurve:
     serializedVersion: 2
     m_Curve:
@@ -37,4 +37,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  RotationSpeed: 20
+  RotationSpeed: 180

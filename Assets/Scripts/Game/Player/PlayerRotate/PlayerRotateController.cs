@@ -29,7 +29,7 @@ namespace Game.Player.PlayerRotate
             {
                 _playerRotateModel.RotateAngle += _inputService.Player.Rotate.ReadValue<Vector2>().x *
                                                   _playerRotateModel.RotateSpeed * Time.deltaTime;
-                ship.transform.rotation = Quaternion.Euler(0.0f, 0.0f, _playerRotateModel.RotateAngle);
+                ship.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -_playerRotateModel.RotateAngle);
             }
         }
     }

@@ -1,4 +1,5 @@
 using System;
+using Services.InputService;
 using UnityEngine;
 
 namespace Game.Player.PlayerMove
@@ -7,6 +8,8 @@ namespace Game.Player.PlayerMove
     {
         public event Action<GameObject> MoveShip;
 
+        private IInputService _input;
+        
         private void Update()
         {
             MoveShip?.Invoke(gameObject);

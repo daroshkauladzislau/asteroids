@@ -6,7 +6,7 @@ namespace Game.Player.PlayerMove
     {
         public float MaxSpeed { get; }
         public float SpeedCurveTime { get; set; }
-        public Vector3 CurrentPosition { get; set; }
+        public Vector3 CurrentPosition;
         public AnimationCurve AccelerationCurve { get; }
 
         public PlayerMoveModel(float maxSpeed, AnimationCurve accelerationCurve)

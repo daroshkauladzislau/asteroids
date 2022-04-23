@@ -17,7 +17,7 @@ namespace Infrastructure.StateMachine.GameStateMachine
         {
             _states = new Dictionary<Type, IState>()
             {
-                [typeof(BootstrapState)] = new BootstrapState(this, coroutineRunner),
+                [typeof(BootstrapState)] = new BootstrapState(this, coroutineRunner, simpleDi),
                 [typeof(LoadLevelState)] = new LoadLevelState(this, simpleDi.Single<IGameFactory>(), simpleDi.Single<ISceneLoader>()),
                 [typeof(GameLoopState)] = new GameLoopState(this, simpleDi.Single<IInputService>()),
             };

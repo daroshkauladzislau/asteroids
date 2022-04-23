@@ -3,6 +3,7 @@ using Infrastructure.DI;
 using Infrastructure.Factory.GameFactory;
 using Services.InputService;
 using Services.SceneLoader;
+using Services.ScreenLimits;
 
 namespace Infrastructure.StateMachine.GameStateMachine.States
 {
@@ -10,11 +11,13 @@ namespace Infrastructure.StateMachine.GameStateMachine.States
     {
         private readonly IGameStateMachine _gameStateMachine;
         private readonly ICoroutineRunner _coroutineRunner;
+        private readonly SimpleDI _simpleDi;
 
-        public BootstrapState(IGameStateMachine gameStateMachine, ICoroutineRunner coroutineRunner)
+        public BootstrapState(IGameStateMachine gameStateMachine, ICoroutineRunner coroutineRunner, SimpleDI simpleDi)
         {
             _gameStateMachine = gameStateMachine;
             _coroutineRunner = coroutineRunner;
+            _simpleDi = simpleDi;
 
             RegisterServices();
         }
@@ -31,10 +34,13 @@ namespace Infrastructure.StateMachine.GameStateMachine.States
 
         private void RegisterServices()
         {
-            SimpleDI.Container.RegisterSingle<ISceneLoader>(new SceneLoader(_coroutineRunner));
-            SimpleDI.Container.RegisterSingle<IInputService>(new InputService());
-            SimpleDI.Container.RegisterSingle<IAssetProvider>(new AssetProvider.AssetProvider());
-            SimpleDI.Container.RegisterSingle<IGameFactory>(new GameFactory(SimpleDI.Container.Single<IAssetProvider>(), SimpleDI.Container.Single<IInputService>()));
+            _simpleDi.RegisterSingle<IScreenLimits>(new ScreenLimits());
+            _simpleDi.RegisterSingle<ISceneLoader>(new SceneLoader(_coroutineRunner));
+            _simpleDi.RegisterSingle<IInputService>(new InputService());
+            _simpleDi.RegisterSingle<IAssetProvider>(new AssetProvider.AssetProvider());
+            _simpleDi.RegisterSingle<IGameFactory>(new GameFactory(_simpleDi.Single<IAssetProvider>(), 
+                _simpleDi.Single<IInputService>(), 
+                _simpleDi.Single<IScreenLimits>()));
         }
     }
 }

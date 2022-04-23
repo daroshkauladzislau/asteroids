@@ -8,5 +8,6 @@ namespace Infrastructure.AssetProvider
     {
         GameObject PlayerShipObject();
         PlayerConfig PlayerConfig();
+        GameObject BulletObject();
     }
 }
