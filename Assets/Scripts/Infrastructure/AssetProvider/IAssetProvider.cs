@@ -7,7 +7,8 @@ namespace Infrastructure.AssetProvider
     public interface IAssetProvider : IService
     {
         GameObject PlayerShipObject();
-        PlayerConfig PlayerConfig();
         GameObject BulletObject();
+        GameObject BigMeteorObject();
+        GameObject SmallMeteorObject();
     }
 }

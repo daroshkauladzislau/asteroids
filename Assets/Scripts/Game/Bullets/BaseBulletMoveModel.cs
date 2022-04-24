@@ -2,16 +2,14 @@ using UnityEngine;
 
 namespace Game.Bullets
 {
-    public abstract class BaseGunModel
+    public abstract class BaseBulletMoveModel
     {
         public float Speed;
-        public float Damage;
         public Vector3 Position;
 
-        protected BaseGunModel(float speed, float damage)
+        protected BaseBulletMoveModel(float speed)
         {
             Speed = speed;
-            Damage = damage;
         }
     }
 }

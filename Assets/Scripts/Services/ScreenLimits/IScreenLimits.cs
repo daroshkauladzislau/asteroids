@@ -7,5 +7,9 @@ namespace Services.ScreenLimits
     {
         bool OutOfLimits(Vector3 transform);
         Vector3 PositionAfterTeleport(Vector3 transform);
+        float LeftLimit();
+        float RightLimit();
+        float TopLimit();
+        float BottomLimit();
     }
 }

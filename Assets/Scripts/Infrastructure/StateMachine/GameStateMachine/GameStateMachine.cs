@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Game.MeteorSpawner;
 using Infrastructure.DI;
 using Infrastructure.Factory.GameFactory;
 using Infrastructure.StateMachine.GameStateMachine.States;
@@ -19,7 +20,7 @@ namespace Infrastructure.StateMachine.GameStateMachine
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, coroutineRunner, simpleDi),
                 [typeof(LoadLevelState)] = new LoadLevelState(this, simpleDi.Single<IGameFactory>(), simpleDi.Single<ISceneLoader>()),
-                [typeof(GameLoopState)] = new GameLoopState(this, simpleDi.Single<IInputService>()),
+                [typeof(GameLoopState)] = new GameLoopState(this, simpleDi.Single<IInputService>(), simpleDi.Single<IMeteorSpawner>()),
             };
         }
 

@@ -1,10 +1,17 @@
 using Game.Bullets;
-using Game.Bullets.Bullet;
+using Game.Bullets.StandardBullet.Move;
+using Game.Meteors.BaseMeteor.MeteorCollide;
+using Game.Meteors.BaseMeteor.MeteorMove;
+using Game.Meteors.BigMeteor.Collide;
+using Game.Meteors.BigMeteor.Move;
+using Game.Meteors.SmallMeteor.Collide;
+using Game.Meteors.SmallMeteor.Move;
 using Game.Player.PlayerMove;
 using Game.Player.PlayerRotate;
 using Game.Player.PlayerShoot;
 using GameConfig;
 using Infrastructure.AssetProvider;
+using Infrastructure.ConfigProvider;
 using Services.InputService;
 using Services.ScreenLimits;
 using UnityEngine;
@@ -14,37 +21,70 @@ namespace Infrastructure.Factory.GameFactory
     public class GameFactory : IGameFactory
     {
         private readonly IAssetProvider _assetProvider;
+        private readonly IConfigProvider _configProvider;
         private readonly IInputService _inputService;
         private readonly IScreenLimits _screenLimits;
 
-        public GameFactory(IAssetProvider assetProvider, IInputService inputService, IScreenLimits screenLimits)
+        public GameFactory(IAssetProvider assetProvider, IConfigProvider configProvider, IInputService inputService, IScreenLimits screenLimits)
         {
             _assetProvider = assetProvider;
+            _configProvider = configProvider;
             _inputService = inputService;
             _screenLimits = screenLimits;
         }
         
         public GameObject CreatePlayerShip()
         {
-            PlayerConfig playerConfig = _assetProvider.PlayerConfig();
-            
+            PlayerConfig playerConfig = _configProvider.PlayerConfig();
             GameObject playerShip = Object.Instantiate(_assetProvider.PlayerShipObject());
-            
-            ConfigurePlayerMove(playerConfig, playerShip);
-            ConfigurePlayerRotate(playerShip, playerConfig);
-            ConfigurePlayerShoot(playerShip, playerConfig);
-
+            ConfigurePlayer(playerConfig, playerShip);
             return playerShip;
         }
 
         public GameObject CreateStandardBullet(Vector3 position, Quaternion rotation)
         {
-            BaseGunModel bulletModel = new BulletModel(1.0f, 0.0f);
+            GunConfig gunConfig = _configProvider.StandardBulletConfig();
             GameObject bulletPrefab = Object.Instantiate(_assetProvider.BulletObject(), position, rotation);
-            BaseGun bulletComponent = bulletPrefab.GetComponent<Bullet>();
+
+            BaseBulletMoveModel bulletModel = new StandardBulletMoveModel(gunConfig.Speed);
+            BaseBulletMove bulletComponent = bulletPrefab.GetComponent<StandardBulletMove>();
             BulletController bulletController =
                 new BulletController(bulletModel, bulletComponent, _screenLimits);
             return bulletPrefab;
+        }
+
+        public GameObject CreateBigMeteor(Vector3 spawnPosition)
+        {
+            MeteorConfig meteorConfig = _configProvider.MeteorConfig();
+            
+            MeteorMoveModel meteorMoveModel = new BigMeteorMoveModelModel(meteorConfig.BigMeteorSpeed, new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)));
+            GameObject meteorObject =
+                Object.Instantiate(_assetProvider.BigMeteorObject(), spawnPosition, Quaternion.identity);
+            MeteorMove meteorMove = meteorObject.GetComponent<MeteorMove>();
+            MeteorController meteorController = new BigMeteorController(meteorMoveModel, meteorMove, _screenLimits);
+
+            MeteorCollide meteorCollide = meteorObject.GetComponent<MeteorCollide>();
+            MeteorCollideController meteorCollideController =
+                new BigMeteorCollideController(meteorCollide, this, _configProvider);
+            
+            return meteorObject;
+        }
+
+        public GameObject CreateSmallMeteor(Vector3 spawnPosition)
+        {
+            MeteorConfig meteorConfig = _configProvider.MeteorConfig();
+
+            MeteorMoveModel meteorMoveModel =
+                new SmallMeteorMoveModelModel(meteorConfig.SmallMeteorSpeed, new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)));
+            GameObject meteorObject =
+                Object.Instantiate(_assetProvider.SmallMeteorObject(), spawnPosition, Quaternion.identity);
+            MeteorMove meteorMove = meteorObject.GetComponent<MeteorMove>();
+            MeteorController meteorController = new SmallMeteorController(meteorMoveModel, meteorMove, _screenLimits);
+
+            MeteorCollide meteorCollide = meteorObject.GetComponent<MeteorCollide>();
+            MeteorCollideController meteorCollideController = new SmallMeteorCollideController(meteorCollide);
+            
+            return meteorObject;
         }
 
         private void ConfigurePlayerShoot(GameObject playerShip, PlayerConfig playerConfig)
@@ -70,6 +110,13 @@ namespace Infrastructure.Factory.GameFactory
             PlayerMove playerShipMoveComponent = playerShip.GetComponent<PlayerMove>();
             PlayerMoveController playerMoveController =
                 new PlayerMoveController(playerShipMoveModel, playerShipMoveComponent, _inputService, _screenLimits);
+        }
+
+        private void ConfigurePlayer(PlayerConfig playerConfig, GameObject playerShip)
+        {
+            ConfigurePlayerMove(playerConfig, playerShip);
+            ConfigurePlayerRotate(playerShip, playerConfig);
+            ConfigurePlayerShoot(playerShip, playerConfig);
         }
     }
 }

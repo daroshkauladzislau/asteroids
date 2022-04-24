@@ -6,8 +6,7 @@ namespace GameConfig
     public class PlayerConfig : ScriptableObject
     {
         public float MaxSpeed;
-        public AnimationCurve AccelerationCurve;
-
         public float RotationSpeed;
+        public AnimationCurve AccelerationCurve;
     }
 }

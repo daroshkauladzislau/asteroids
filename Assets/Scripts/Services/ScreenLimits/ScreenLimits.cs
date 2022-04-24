@@ -47,16 +47,16 @@ namespace Services.ScreenLimits
             return newPosition;
         }
 
-        private float LeftLimit() => 
+        public float LeftLimit() => 
             Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 0.0f, 0.0f)).x;
 
-        private float RightLimit() => 
+        public float RightLimit() => 
             Camera.main.ViewportToWorldPoint(new Vector3(1.0f, 0.0f, 0.0f)).x;
 
-        private float TopLimit() =>
+        public float TopLimit() =>
             Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 1.0f, 0.0f)).y;
 
-        private float BottomLimit() => 
+        public float BottomLimit() => 
             Camera.main.ViewportToWorldPoint(new Vector3(0.0f, 0.0f, 0.0f)).y;
 
         private void SetupScreen()

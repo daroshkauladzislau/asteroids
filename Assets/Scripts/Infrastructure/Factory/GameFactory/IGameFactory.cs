@@ -7,5 +7,7 @@ namespace Infrastructure.Factory.GameFactory
     {
         GameObject CreatePlayerShip();
         GameObject CreateStandardBullet(Vector3 position, Quaternion rotation);
+        GameObject CreateBigMeteor(Vector3 spawnPosition);
+        GameObject CreateSmallMeteor(Vector3 spawnPosition);
     }
 }

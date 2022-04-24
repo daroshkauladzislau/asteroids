@@ -1,8 +1,8 @@
 namespace Game.Bullets.Laser
 {
-    public class LaserModel : BaseGunModel
+    public class LaserModel : BaseBulletMoveModel
     {
-        public LaserModel(float speed, float damage) : base(speed, damage)
+        public LaserModel(float speed) : base(speed)
         {
         }
     }
