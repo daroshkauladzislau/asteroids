@@ -1,4 +1,4 @@
-using Services.InputService;
+using Infrastructure.Services.InputService;
 using UnityEngine;
 
 namespace Game.Player.PlayerRotate

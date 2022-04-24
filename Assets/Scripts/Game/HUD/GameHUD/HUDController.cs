@@ -1,7 +1,7 @@
 using Infrastructure.Factory.GameFactory;
 using TMPro;
 
-namespace Game.HUD
+namespace Game.HUD.GameHUD
 {
     public class HUDController
     {
@@ -32,14 +32,12 @@ namespace Game.HUD
             text.text = $"Cooldown:{_gameFactory.PlayerShootModel.LaserShootDelay}";
 
         private void UpdateSpeedText(TextMeshProUGUI text) => 
-            text.text = $"Speed:{_gameFactory.PlayerMoveModel.SpeedCurveTime * 95.5f}";
+            text.text = $"Speed:{_gameFactory.PlayerMoveModel.SpeedCurveTime * GameConstants.GameConstants.SpeedometerValue}";
 
         private void UpdateRotationText(TextMeshProUGUI text) => 
             text.text = $"Angle:{_gameFactory.PlayerRotateModel.RotateAngle}";
 
         private void UpdatePositionText(TextMeshProUGUI text) => 
             text.text = $"X:{_gameFactory.PlayerMoveModel.CurrentPosition.x}, Y:{_gameFactory.PlayerMoveModel.CurrentPosition.y}";
-        
-        
     }
 }

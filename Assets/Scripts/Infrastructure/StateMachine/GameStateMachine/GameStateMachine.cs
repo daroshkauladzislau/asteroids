@@ -4,9 +4,10 @@ using Game.AlienSpawner;
 using Game.MeteorSpawner;
 using Infrastructure.DI;
 using Infrastructure.Factory.GameFactory;
+using Infrastructure.GameBootstrapper;
+using Infrastructure.Services.InputService;
+using Infrastructure.Services.SceneLoader;
 using Infrastructure.StateMachine.GameStateMachine.States;
-using Services.InputService;
-using Services.SceneLoader;
 
 namespace Infrastructure.StateMachine.GameStateMachine
 {

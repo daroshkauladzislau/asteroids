@@ -2,7 +2,8 @@ using System.Collections;
 using Infrastructure;
 using Infrastructure.ConfigProvider;
 using Infrastructure.Factory.GameFactory;
-using Services.ScreenLimits;
+using Infrastructure.GameBootstrapper;
+using Infrastructure.Services.ScreenLimits;
 using UnityEngine;
 
 namespace Game.AlienSpawner
@@ -14,6 +15,8 @@ namespace Game.AlienSpawner
         private readonly IScreenLimits _screenLimits;
         private readonly IConfigProvider _configProvider;
 
+        private Coroutine _activeCoroutine;
+
         public AlienSpawner(ICoroutineRunner coroutineRunner, IGameFactory gameFactory, IScreenLimits screenLimits, IConfigProvider configProvider)
         {
             _coroutineRunner = coroutineRunner;
@@ -22,15 +25,11 @@ namespace Game.AlienSpawner
             _configProvider = configProvider;
         }
 
-        public void StartSpawnAliens()
-        {
-            _coroutineRunner.StartCoroutine(SpawnAlienCoroutine());
-        }
+        public void StartSpawnAliens() => 
+            _activeCoroutine = _coroutineRunner.StartCoroutine(SpawnAlienCoroutine());
 
-        public void StopSpawnAliens()
-        {
-            _coroutineRunner.StopCoroutine(SpawnAlienCoroutine());
-        }
+        public void StopSpawnAliens() => 
+            _coroutineRunner.StopCoroutine(_activeCoroutine);
 
         private IEnumerator SpawnAlienCoroutine()
         {

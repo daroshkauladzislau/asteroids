@@ -4,9 +4,10 @@ using Infrastructure.AssetProvider;
 using Infrastructure.ConfigProvider;
 using Infrastructure.DI;
 using Infrastructure.Factory.GameFactory;
-using Services.InputService;
-using Services.SceneLoader;
-using Services.ScreenLimits;
+using Infrastructure.GameBootstrapper;
+using Infrastructure.Services.InputService;
+using Infrastructure.Services.SceneLoader;
+using Infrastructure.Services.ScreenLimits;
 
 namespace Infrastructure.StateMachine.GameStateMachine.States
 {

@@ -1,19 +1,19 @@
-using System;
+using Infrastructure.Factory.GameFactory;
 using Infrastructure.StateMachine.GameStateMachine;
 using Infrastructure.StateMachine.GameStateMachine.States;
-using UnityEngine;
-using UnityEngine.UI;
 
 namespace Game.HUD.EndSessionHUD
 {
     public class EndSessionHUDController
     {
         private readonly EndSessionHUD _endSessionHUD;
+        private readonly IGameFactory _gameFactory;
         private readonly IGameStateMachine _gameStateMachine;
 
-        public EndSessionHUDController(EndSessionHUD endSessionHUD, IGameStateMachine gameStateMachine)
+        public EndSessionHUDController(EndSessionHUD endSessionHUD, IGameFactory gameFactory, IGameStateMachine gameStateMachine)
         {
             _endSessionHUD = endSessionHUD;
+            _gameFactory = gameFactory;
             _gameStateMachine = gameStateMachine;
 
             Subscribe();
@@ -21,23 +21,18 @@ namespace Game.HUD.EndSessionHUD
 
         private void Subscribe()
         {
-            //UpdateScoreText();
+            UpdateScoreText();
             ConfigurePlayAgainButton();
         }
 
-        // private void UpdateScoreText() => 
-        //     _endSessionHUD.ScoreText.Invoke().text = String.Empty;
+        private void UpdateScoreText() => 
+            _endSessionHUD.ScoreText.text = $"Score: {_gameFactory.GameScore.CurrentScore}";
+
 
         private void ConfigurePlayAgainButton() => 
-            _endSessionHUD.PlayAgainButton += PlayAgain;
+            _endSessionHUD.PlayAgainButton.onClick.AddListener(PlayAgainLogic);
 
-        private void PlayAgain(Button button) => 
-            button.onClick.AddListener(PlayAgainLogic);
-
-        private void PlayAgainLogic()
-        {
-            Debug.Log("Play again");
+        private void PlayAgainLogic() => 
             _gameStateMachine.Enter<LoadLevelState>();
-        }
     }
 }

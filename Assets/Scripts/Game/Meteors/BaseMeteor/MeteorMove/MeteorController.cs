@@ -1,4 +1,4 @@
-using Services.ScreenLimits;
+using Infrastructure.Services.ScreenLimits;
 using UnityEngine;
 
 namespace Game.Meteors.BaseMeteor.MeteorMove

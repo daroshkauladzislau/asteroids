@@ -1,3 +1,4 @@
+using Game.GameScore;
 using Game.Player.PlayerMove;
 using Game.Player.PlayerRotate;
 using Game.Player.PlayerShoot;
@@ -12,6 +13,7 @@ namespace Infrastructure.Factory.GameFactory
         PlayerMoveModel PlayerMoveModel { get; }
         PlayerRotateModel PlayerRotateModel { get; }
         PlayerShootModel PlayerShootModel { get; }
+        GameScore GameScore { get; }
         GameObject CreatePlayerShip();
         GameObject CreateStandardBullet(Vector3 position, Quaternion rotation);
         GameObject CreateLaserBullet(Vector3 transformPosition, Quaternion rotation);
@@ -20,5 +22,6 @@ namespace Infrastructure.Factory.GameFactory
         GameObject CreateAlien(Vector3 position);
         GameObject CreateHUD();
         GameObject CreateEndSessionHUD();
+        void CreateGameScore();
     }
 }

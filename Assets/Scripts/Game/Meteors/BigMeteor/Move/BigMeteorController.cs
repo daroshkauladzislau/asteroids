@@ -1,5 +1,5 @@
 using Game.Meteors.BaseMeteor.MeteorMove;
-using Services.ScreenLimits;
+using Infrastructure.Services.ScreenLimits;
 using UnityEngine;
 
 namespace Game.Meteors.BigMeteor.Move

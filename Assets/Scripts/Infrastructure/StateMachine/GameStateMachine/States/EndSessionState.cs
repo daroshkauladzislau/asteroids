@@ -15,12 +15,17 @@ namespace Infrastructure.StateMachine.GameStateMachine.States
 
         public void Enter()
         {
-            _gameFactory.CreateEndSessionHUD();
+            InitializeFinalHUD();
         }
 
         public void Exit()
         {
             
+        }
+
+        private void InitializeFinalHUD()
+        {
+            _gameFactory.CreateEndSessionHUD();
         }
     }
 }

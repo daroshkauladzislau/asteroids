@@ -26,7 +26,6 @@ namespace Game.Player.PlayerCollide
 
         private void OnCollide(Collider2D obj)
         {
-            Debug.Log($"GAME OVER");
             if (obj.gameObject.TryGetComponent(out MeteorCollide meteorCollide) ||
                 obj.gameObject.TryGetComponent(out AlienCollide alienCollide))
             {

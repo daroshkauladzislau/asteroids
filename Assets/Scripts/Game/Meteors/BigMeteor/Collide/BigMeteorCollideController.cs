@@ -28,10 +28,15 @@ namespace Game.Meteors.BigMeteor.Collide
         {
             if (obj.gameObject.TryGetComponent(out BaseBulletCollide bullet))
             {
-                for (int i = 0; i < _configProvider.MeteorConfig().MeteorsAfterDestroy; i++)
-                {
-                    _gameFactory.CreateSmallMeteor(MeteorCollide.gameObject.transform.position);
-                }
+                CreateMiniMeteors();
+            }
+        }
+
+        private void CreateMiniMeteors()
+        {
+            for (int i = 0; i < _configProvider.MeteorConfig().MeteorsAfterDestroy; i++)
+            {
+                _gameFactory.CreateSmallMeteor(MeteorCollide.gameObject.transform.position);
             }
         }
     }

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d459d77b6c4765b8a48db36b0a049b, type: 3}
   m_Name: AlienConfig
   m_EditorClassIdentifier: 
-  Speed: 0.5
-  SpawnDelay: 20
+  Speed: 0.8
+  SpawnDelay: 10

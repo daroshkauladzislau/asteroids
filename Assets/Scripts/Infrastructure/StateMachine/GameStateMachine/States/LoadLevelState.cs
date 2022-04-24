@@ -1,11 +1,12 @@
 using Infrastructure.Factory.GameFactory;
-using Services.SceneLoader;
+using Infrastructure.Services.SceneLoader;
 using UnityEngine;
 
 namespace Infrastructure.StateMachine.GameStateMachine.States
 {
     public class LoadLevelState : IState
     {
+        private const string GameSceneName = "Game";
         private readonly IGameStateMachine _gameStateMachine;
         private readonly IGameFactory _gameFactory;
         private readonly ISceneLoader _sceneLoader;
@@ -19,8 +20,7 @@ namespace Infrastructure.StateMachine.GameStateMachine.States
         
         public void Enter()
         {
-            Debug.Log("Enter load level");
-            _sceneLoader.Load("Game", CreateGameWorld);
+            _sceneLoader.Load(GameSceneName, CreateGameWorld);
             _gameStateMachine.Enter<GameLoopState>();
         }
 
@@ -31,6 +31,7 @@ namespace Infrastructure.StateMachine.GameStateMachine.States
 
         private void CreateGameWorld()
         {
+            _gameFactory.CreateGameScore();
             _gameFactory.CreatePlayerShip();
             _gameFactory.CreateHUD();
         }

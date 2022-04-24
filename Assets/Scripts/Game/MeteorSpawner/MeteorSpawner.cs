@@ -2,7 +2,8 @@ using System.Collections;
 using Infrastructure;
 using Infrastructure.ConfigProvider;
 using Infrastructure.Factory.GameFactory;
-using Services.ScreenLimits;
+using Infrastructure.GameBootstrapper;
+using Infrastructure.Services.ScreenLimits;
 using UnityEngine;
 
 namespace Game.MeteorSpawner
@@ -14,6 +15,8 @@ namespace Game.MeteorSpawner
         private readonly IScreenLimits _screenLimits;
         private readonly IConfigProvider _configProvider;
 
+        private Coroutine _activeCoroutine;
+
         public MeteorSpawner(ICoroutineRunner coroutineRunner, IGameFactory gameFactory, IScreenLimits screenLimits, IConfigProvider configProvider)
         {
             _coroutineRunner = coroutineRunner;
@@ -22,15 +25,11 @@ namespace Game.MeteorSpawner
             _configProvider = configProvider;
         }
 
-        public void StartSpawnMeteors()
-        {
-            _coroutineRunner.StartCoroutine(SpawnMeteorCoroutine());
-        }
+        public void StartSpawnMeteors() => 
+            _activeCoroutine = _coroutineRunner.StartCoroutine(SpawnMeteorCoroutine());
 
-        public void StopSpawnMeteor()
-        {
-            _coroutineRunner.StopCoroutine(SpawnMeteorCoroutine());
-        }
+        public void StopSpawnMeteor() => 
+            _coroutineRunner.StopCoroutine(_activeCoroutine);
 
         private IEnumerator SpawnMeteorCoroutine()
         {

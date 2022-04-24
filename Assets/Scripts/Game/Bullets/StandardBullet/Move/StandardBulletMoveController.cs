@@ -1,5 +1,5 @@
 using Game.Bullets.BaseBullet.Move;
-using Services.ScreenLimits;
+using Infrastructure.Services.ScreenLimits;
 
 namespace Game.Bullets.StandardBullet.Move
 {

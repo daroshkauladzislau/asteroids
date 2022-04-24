@@ -1,13 +1,14 @@
 using Game.Aliens.Collide;
 using Game.Bullets.BaseBullet.Collide;
 using Game.Meteors.BaseMeteor.MeteorCollide;
+using Infrastructure.Factory.GameFactory;
 using UnityEngine;
 
 namespace Game.Bullets.Laser.Collide
 {
     public class LaserCollideController : BaseBulletCollideController
     {
-        public LaserCollideController(BaseBulletCollide baseBulletCollide) : base(baseBulletCollide)
+        public LaserCollideController(BaseBulletCollide baseBulletCollide, IGameFactory gameFactory) : base(baseBulletCollide, gameFactory)
         {
             Subscribe();
         }

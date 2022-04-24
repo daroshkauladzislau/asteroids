@@ -1,6 +1,6 @@
 using Game.AlienSpawner;
 using Game.MeteorSpawner;
-using Services.InputService;
+using Infrastructure.Services.InputService;
 
 namespace Infrastructure.StateMachine.GameStateMachine.States
 {
@@ -21,16 +21,34 @@ namespace Infrastructure.StateMachine.GameStateMachine.States
         
         public void Enter()
         {
-            _inputService.Enable();
-            _meteorSpawner.StartSpawnMeteors();
-            _alienSpawner.StartSpawnAliens();
+            EnableInput();
+            ActivateSpawners();
         }
 
         public void Exit()
         {
-            _inputService.Disable();
+            DisableInput();
+            DeactivateSpawners();
+        }
+
+        private void ActivateSpawners()
+        {
+            _meteorSpawner.StartSpawnMeteors();
+            _alienSpawner.StartSpawnAliens();
+        }
+
+        private void DeactivateSpawners()
+        {
             _meteorSpawner.StopSpawnMeteor();
             _alienSpawner.StopSpawnAliens();
+        }
+
+        private void EnableInput() => 
+            _inputService.Enable();
+
+        private void DisableInput()
+        {
+            _inputService.Disable();
         }
     }
 }

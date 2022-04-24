@@ -1,5 +1,5 @@
-using Services.InputService;
-using Services.ScreenLimits;
+using Infrastructure.Services.InputService;
+using Infrastructure.Services.ScreenLimits;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

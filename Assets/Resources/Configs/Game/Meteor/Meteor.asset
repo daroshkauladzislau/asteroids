@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7294b12b791b49bf909f7ec819039219, type: 3}
   m_Name: Meteor
   m_EditorClassIdentifier: 
-  BigMeteorSpeed: 1
-  SmallMeteorSpeed: 2
-  SpawnDelay: 5
-  MeteorsAfterDestroy: 2
+  BigMeteorSpeed: 2
+  SmallMeteorSpeed: 3
+  SpawnDelay: 4
+  MeteorsAfterDestroy: 3

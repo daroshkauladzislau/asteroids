@@ -1,4 +1,4 @@
-using Services.ScreenLimits;
+using Infrastructure.Services.ScreenLimits;
 using UnityEngine;
 
 namespace Game.Bullets.BaseBullet.Move
@@ -9,7 +9,7 @@ namespace Game.Bullets.BaseBullet.Move
         protected readonly BaseBulletMove BaseBulletMove;
         protected readonly IScreenLimits ScreenLimits;
 
-        public BaseBulletMoveController(BaseBulletMoveModel baseBulletMoveModel, BaseBulletMove baseBulletMove, IScreenLimits screenLimits)
+        protected BaseBulletMoveController(BaseBulletMoveModel baseBulletMoveModel, BaseBulletMove baseBulletMove, IScreenLimits screenLimits)
         {
             BaseBulletMoveModel = baseBulletMoveModel;
             BaseBulletMove = baseBulletMove;

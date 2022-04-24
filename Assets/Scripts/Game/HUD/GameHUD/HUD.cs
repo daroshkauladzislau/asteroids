@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-namespace Game.HUD
+namespace Game.HUD.GameHUD
 {
     public class HUD : MonoBehaviour
     {

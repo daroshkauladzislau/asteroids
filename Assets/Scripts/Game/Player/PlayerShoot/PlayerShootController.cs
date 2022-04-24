@@ -1,5 +1,5 @@
 using Infrastructure.Factory.GameFactory;
-using Services.InputService;
+using Infrastructure.Services.InputService;
 using UnityEngine;
 
 namespace Game.Player.PlayerShoot
@@ -32,7 +32,6 @@ namespace Game.Player.PlayerShoot
 
         private void Shoot(GameObject obj)
         {
-            Debug.Log($"{_playerShootModel.LaserShootCount} - {_playerShootModel.LaserShootDelay}");
             CalculateDelay();
 
             if (IsReadyToShootStandard())
@@ -55,7 +54,6 @@ namespace Game.Player.PlayerShoot
         private void LaserShoot(GameObject obj)
         {
             _gameFactory.CreateLaserBullet(obj.transform.position, obj.transform.rotation);
-            _playerShootModel.LaserShootDelay = _laserDelay;
             _playerShootModel.LaserShootCount--;
         }
 
@@ -67,6 +65,20 @@ namespace Game.Player.PlayerShoot
 
         private void CalculateDelay()
         {
+            CalculateLaserDelay();
+            CalculateStandardBulletDelay();
+        }
+
+        private void CalculateStandardBulletDelay()
+        {
+            if (_playerShootModel.StandardBulletShootDelay >= 0)
+            {
+                _playerShootModel.StandardBulletShootDelay -= Time.deltaTime;
+            }
+        }
+
+        private void CalculateLaserDelay()
+        {
             if (_playerShootModel.LaserShootDelay >= 0)
             {
                 _playerShootModel.LaserShootDelay -= Time.deltaTime;
@@ -75,11 +87,6 @@ namespace Game.Player.PlayerShoot
             {
                 _playerShootModel.LaserShootCount++;
                 _playerShootModel.LaserShootDelay = _laserDelay;
-            }
-            
-            if (_playerShootModel.StandardBulletShootDelay >= 0)
-            {
-                _playerShootModel.StandardBulletShootDelay -= Time.deltaTime;
             }
         }
     }
