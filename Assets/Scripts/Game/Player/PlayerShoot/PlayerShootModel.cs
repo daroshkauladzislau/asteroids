@@ -4,11 +4,6 @@ namespace Game.Player.PlayerShoot
     {
         public float StandardBulletShootDelay;
         public float LaserShootDelay;
-
-        public PlayerShootModel(float standardBulletShootDelay, float laserShootDelay)
-        {
-            StandardBulletShootDelay = standardBulletShootDelay;
-            LaserShootDelay = laserShootDelay;
-        }
+        public int LaserShootCount = 0;
     }
 }

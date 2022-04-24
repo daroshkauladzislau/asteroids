@@ -1,5 +1,6 @@
 using Infrastructure.Factory.GameFactory;
 using Services.SceneLoader;
+using UnityEngine;
 
 namespace Infrastructure.StateMachine.GameStateMachine.States
 {
@@ -18,6 +19,7 @@ namespace Infrastructure.StateMachine.GameStateMachine.States
         
         public void Enter()
         {
+            Debug.Log("Enter load level");
             _sceneLoader.Load("Game", CreateGameWorld);
             _gameStateMachine.Enter<GameLoopState>();
         }
@@ -30,6 +32,7 @@ namespace Infrastructure.StateMachine.GameStateMachine.States
         private void CreateGameWorld()
         {
             _gameFactory.CreatePlayerShip();
+            _gameFactory.CreateHUD();
         }
     }
 }

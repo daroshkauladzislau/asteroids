@@ -1,3 +1,4 @@
+using Game.AlienSpawner;
 using Game.MeteorSpawner;
 using Infrastructure.AssetProvider;
 using Infrastructure.ConfigProvider;
@@ -36,6 +37,7 @@ namespace Infrastructure.StateMachine.GameStateMachine.States
 
         private void RegisterServices()
         {
+            RegisterStateMachine();
             RegisterScreenLimit();
             RegisterSceneLoader();
             RegisterInputService();
@@ -43,17 +45,23 @@ namespace Infrastructure.StateMachine.GameStateMachine.States
             RegisterConfigProvider();
             RegisterGameFactory();
             RegisterMeteorSpawner();
+            RegisterAliensSpawner();
         }
 
-        private void RegisterMeteorSpawner()
-        {
+        private void RegisterStateMachine() => 
+            _simpleDi.RegisterSingle<IGameStateMachine>(_gameStateMachine);
+
+        private void RegisterAliensSpawner() => 
+            _simpleDi.RegisterSingle<IAlienSpawner>(new AlienSpawner(_coroutineRunner, 
+                _simpleDi.Single<IGameFactory>(), _simpleDi.Single<IScreenLimits>(), _simpleDi.Single<IConfigProvider>()));
+
+        private void RegisterMeteorSpawner() =>
             _simpleDi.RegisterSingle<IMeteorSpawner>(new MeteorSpawner(_coroutineRunner,
                 _simpleDi.Single<IGameFactory>(), _simpleDi.Single<IScreenLimits>(), _simpleDi.Single<IConfigProvider>()));
-        }
 
         private void RegisterGameFactory() =>
             _simpleDi.RegisterSingle<IGameFactory>(new GameFactory(_simpleDi.Single<IAssetProvider>(),
-                _simpleDi.Single<IConfigProvider>(), _simpleDi.Single<IInputService>(), _simpleDi.Single<IScreenLimits>()));
+                _simpleDi.Single<IConfigProvider>(), _simpleDi.Single<IInputService>(), _simpleDi.Single<IScreenLimits>(), _gameStateMachine));
 
         private void RegisterConfigProvider() => 
             _simpleDi.RegisterSingle<IConfigProvider>(new ConfigProvider.ConfigProvider());

@@ -1,3 +1,4 @@
+using Game.Aliens.Collide;
 using Game.Bullets.BaseBullet.Collide;
 using Game.Meteors.BaseMeteor.MeteorCollide;
 using UnityEngine;
@@ -18,10 +19,7 @@ namespace Game.Bullets.Laser.Collide
 
         protected override void OnCollide(Collider2D obj)
         {
-            if (obj.gameObject.TryGetComponent(out MeteorCollide meteorCollide))
-            {
-                meteorCollide.gameObject.SetActive(false);
-            }
+            base.OnCollide(obj);
         }
     }
 }

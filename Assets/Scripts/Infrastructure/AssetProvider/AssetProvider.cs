@@ -9,6 +9,9 @@ namespace Infrastructure.AssetProvider
         private const string PlayerShipPrefabPath = "Prefabs/Game/PlayerShip";
         private const string BulletPrefabPath = "Prefabs/Game/StandardBullet";
         private const string SmallMeteorObjectPath = "Prefabs/Game/SmallMeteor";
+        private const string AlienPrefabPath = "Prefabs/Game/Alien";
+        private const string HUDPrefabPath = "Prefabs/Game/HUD";
+        private const string EndSessionHUDPrefabPath = "Prefabs/Game/EndSessionHUD";
 
         public GameObject PlayerShipObject() => 
             Resources.Load<GameObject>(PlayerShipPrefabPath);
@@ -24,5 +27,14 @@ namespace Infrastructure.AssetProvider
 
         public GameObject LaserObject() => 
             Resources.Load<GameObject>(LaserPrefabPath);
+
+        public GameObject AlienObject() => 
+            Resources.Load<GameObject>(AlienPrefabPath);
+
+        public GameObject HUDObject() => 
+            Resources.Load<GameObject>(HUDPrefabPath);
+
+        public GameObject EndSessionHUD() => 
+            Resources.Load<GameObject>(EndSessionHUDPrefabPath);
     }
 }

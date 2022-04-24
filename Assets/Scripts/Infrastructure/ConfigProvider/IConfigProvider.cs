@@ -9,5 +9,6 @@ namespace Infrastructure.ConfigProvider
         GunConfig StandardBulletConfig();
         GunConfig LaserBulletConfig();
         MeteorConfig MeteorConfig();
+        AlienConfig AlienConfig();
     }
 }

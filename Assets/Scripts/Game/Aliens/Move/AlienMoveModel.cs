@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game.Aliens
+namespace Game.Aliens.Move
 {
     public class AlienMoveModel
     {

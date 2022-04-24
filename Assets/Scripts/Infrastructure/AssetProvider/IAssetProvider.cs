@@ -11,5 +11,8 @@ namespace Infrastructure.AssetProvider
         GameObject BigMeteorObject();
         GameObject SmallMeteorObject();
         GameObject LaserObject();
+        GameObject AlienObject();
+        GameObject HUDObject();
+        GameObject EndSessionHUD();
     }
 }

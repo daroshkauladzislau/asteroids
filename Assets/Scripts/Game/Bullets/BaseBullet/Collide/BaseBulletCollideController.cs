@@ -1,3 +1,4 @@
+using Game.Aliens.Collide;
 using Game.Meteors.BaseMeteor.MeteorCollide;
 using UnityEngine;
 
@@ -16,8 +17,12 @@ namespace Game.Bullets.BaseBullet.Collide
         {
             if (obj.gameObject.TryGetComponent(out MeteorCollide meteorCollide))
             {
-                BaseBulletCollide.gameObject.SetActive(false);
                 meteorCollide.gameObject.SetActive(false);
+            }
+            
+            if (obj.gameObject.TryGetComponent(out AlienCollide alienCollide))
+            {
+                alienCollide.gameObject.SetActive(false);
             }
         }
     }

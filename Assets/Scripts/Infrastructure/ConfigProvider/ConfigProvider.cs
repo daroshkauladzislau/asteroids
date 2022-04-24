@@ -9,6 +9,7 @@ namespace Infrastructure.ConfigProvider
         private const string PlayerConfigPath = "Configs/Game/Player/PlayerConfig";
         private const string MeteorConfigPath = "Configs/Game/Meteor/Meteor";
         private const string LaserConfigPath = "Configs/Game/Gun/Laser/Laser";
+        private const string AlienConfigPath = "Configs/Game/Alien/AlienConfig";
 
         public PlayerConfig PlayerConfig() => 
             Resources.Load<PlayerConfig>(PlayerConfigPath);
@@ -21,5 +22,8 @@ namespace Infrastructure.ConfigProvider
 
         public MeteorConfig MeteorConfig() => 
             Resources.Load<MeteorConfig>(MeteorConfigPath);
+
+        public AlienConfig AlienConfig() =>
+            Resources.Load<AlienConfig>(AlienConfigPath);
     }
 }

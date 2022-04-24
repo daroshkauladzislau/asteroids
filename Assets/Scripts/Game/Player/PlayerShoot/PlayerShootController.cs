@@ -32,6 +32,7 @@ namespace Game.Player.PlayerShoot
 
         private void Shoot(GameObject obj)
         {
+            Debug.Log($"{_playerShootModel.LaserShootCount} - {_playerShootModel.LaserShootDelay}");
             CalculateDelay();
 
             if (IsReadyToShootStandard())
@@ -45,8 +46,8 @@ namespace Game.Player.PlayerShoot
             }
         }
 
-        private bool IsReadyToShootLaser() => 
-            _inputService.Player.FireLaser.triggered && _playerShootModel.LaserShootDelay <= 0.0f;
+        private bool IsReadyToShootLaser() =>
+            _inputService.Player.FireLaser.triggered  && _playerShootModel.LaserShootCount > 0;
 
         private bool IsReadyToShootStandard() => 
             _inputService.Player.FireStandard.triggered && _playerShootModel.StandardBulletShootDelay <= 0.0f;
@@ -55,6 +56,7 @@ namespace Game.Player.PlayerShoot
         {
             _gameFactory.CreateLaserBullet(obj.transform.position, obj.transform.rotation);
             _playerShootModel.LaserShootDelay = _laserDelay;
+            _playerShootModel.LaserShootCount--;
         }
 
         private void StandardBulletShoot(GameObject obj)
@@ -65,8 +67,20 @@ namespace Game.Player.PlayerShoot
 
         private void CalculateDelay()
         {
-            _playerShootModel.LaserShootDelay -= Time.deltaTime;
-            _playerShootModel.StandardBulletShootDelay -= Time.deltaTime;
+            if (_playerShootModel.LaserShootDelay >= 0)
+            {
+                _playerShootModel.LaserShootDelay -= Time.deltaTime;
+            }
+            else
+            {
+                _playerShootModel.LaserShootCount++;
+                _playerShootModel.LaserShootDelay = _laserDelay;
+            }
+            
+            if (_playerShootModel.StandardBulletShootDelay >= 0)
+            {
+                _playerShootModel.StandardBulletShootDelay -= Time.deltaTime;
+            }
         }
     }
 }
