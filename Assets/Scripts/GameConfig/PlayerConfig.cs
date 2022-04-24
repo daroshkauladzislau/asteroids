@@ -7,6 +7,10 @@ namespace GameConfig
     {
         public float MaxSpeed;
         public float RotationSpeed;
+        
         public AnimationCurve AccelerationCurve;
+
+        public float LaserDelay;
+        public float StandardBulletDelay;
     }
 }

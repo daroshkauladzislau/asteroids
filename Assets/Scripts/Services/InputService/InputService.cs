@@ -37,9 +37,17 @@ namespace Services.InputService
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Fire"",
+                    ""name"": ""FireStandard"",
                     ""type"": ""Button"",
                     ""id"": ""e4a882b3-962a-45ff-b50b-86ed5a003673"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""FireLaser"",
+                    ""type"": ""Button"",
+                    ""id"": ""0f6b8293-6d98-480f-8777-d86d88c9e045"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -108,7 +116,18 @@ namespace Services.InputService
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Fire"",
+                    ""action"": ""FireStandard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""489f2920-60b4-440a-877f-1683bcd3f6ea"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FireLaser"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -121,7 +140,8 @@ namespace Services.InputService
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
             m_Player_Rotate = m_Player.FindAction("Rotate", throwIfNotFound: true);
-            m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
+            m_Player_FireStandard = m_Player.FindAction("FireStandard", throwIfNotFound: true);
+            m_Player_FireLaser = m_Player.FindAction("FireLaser", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -173,14 +193,16 @@ namespace Services.InputService
         private IPlayerActions m_PlayerActionsCallbackInterface;
         private readonly InputAction m_Player_Move;
         private readonly InputAction m_Player_Rotate;
-        private readonly InputAction m_Player_Fire;
+        private readonly InputAction m_Player_FireStandard;
+        private readonly InputAction m_Player_FireLaser;
         public struct PlayerActions
         {
             private @InputService m_Wrapper;
             public PlayerActions(@InputService wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Player_Move;
             public InputAction @Rotate => m_Wrapper.m_Player_Rotate;
-            public InputAction @Fire => m_Wrapper.m_Player_Fire;
+            public InputAction @FireStandard => m_Wrapper.m_Player_FireStandard;
+            public InputAction @FireLaser => m_Wrapper.m_Player_FireLaser;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -196,9 +218,12 @@ namespace Services.InputService
                     @Rotate.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotate;
                     @Rotate.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotate;
                     @Rotate.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotate;
-                    @Fire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
-                    @Fire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
-                    @Fire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
+                    @FireStandard.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireStandard;
+                    @FireStandard.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireStandard;
+                    @FireStandard.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireStandard;
+                    @FireLaser.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireLaser;
+                    @FireLaser.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireLaser;
+                    @FireLaser.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFireLaser;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -209,9 +234,12 @@ namespace Services.InputService
                     @Rotate.started += instance.OnRotate;
                     @Rotate.performed += instance.OnRotate;
                     @Rotate.canceled += instance.OnRotate;
-                    @Fire.started += instance.OnFire;
-                    @Fire.performed += instance.OnFire;
-                    @Fire.canceled += instance.OnFire;
+                    @FireStandard.started += instance.OnFireStandard;
+                    @FireStandard.performed += instance.OnFireStandard;
+                    @FireStandard.canceled += instance.OnFireStandard;
+                    @FireLaser.started += instance.OnFireLaser;
+                    @FireLaser.performed += instance.OnFireLaser;
+                    @FireLaser.canceled += instance.OnFireLaser;
                 }
             }
         }
@@ -220,7 +248,8 @@ namespace Services.InputService
         {
             void OnMove(InputAction.CallbackContext context);
             void OnRotate(InputAction.CallbackContext context);
-            void OnFire(InputAction.CallbackContext context);
+            void OnFireStandard(InputAction.CallbackContext context);
+            void OnFireLaser(InputAction.CallbackContext context);
         }
     }
 }

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Game.Bullets
+namespace Game.Bullets.BaseBullet.Move
 {
     public abstract class BaseBulletMove : MonoBehaviour
     {

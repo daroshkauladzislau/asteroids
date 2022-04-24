@@ -7,6 +7,7 @@ namespace Infrastructure.ConfigProvider
     {
         PlayerConfig PlayerConfig();
         GunConfig StandardBulletConfig();
+        GunConfig LaserBulletConfig();
         MeteorConfig MeteorConfig();
     }
 }

@@ -1,13 +1,13 @@
 using UnityEngine;
 
-namespace Game.Bullets
+namespace Game.Aliens
 {
-    public abstract class BaseBulletMoveModel
+    public class AlienMoveModel
     {
         public float Speed;
         public Vector3 Position;
-
-        protected BaseBulletMoveModel(float speed)
+        
+        public AlienMoveModel(float speed)
         {
             Speed = speed;
         }

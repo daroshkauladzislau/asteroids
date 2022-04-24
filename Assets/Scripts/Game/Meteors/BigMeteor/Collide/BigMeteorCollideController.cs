@@ -1,4 +1,4 @@
-using Game.Bullets.StandardBullet.Move;
+using Game.Bullets.BaseBullet.Collide;
 using Game.Meteors.BaseMeteor.MeteorCollide;
 using Infrastructure.ConfigProvider;
 using Infrastructure.Factory.GameFactory;
@@ -26,11 +26,8 @@ namespace Game.Meteors.BigMeteor.Collide
 
         private void OnMeteorCollision(Collider2D obj)
         {
-            if (obj.gameObject.TryGetComponent(out StandardBulletMove bullet))
+            if (obj.gameObject.TryGetComponent(out BaseBulletCollide bullet))
             {
-                bullet.gameObject.SetActive(false);
-                MeteorCollide.gameObject.SetActive(false);
-                
                 for (int i = 0; i < _configProvider.MeteorConfig().MeteorsAfterDestroy; i++)
                 {
                     _gameFactory.CreateSmallMeteor(MeteorCollide.gameObject.transform.position);

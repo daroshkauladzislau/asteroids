@@ -24,7 +24,12 @@ namespace Services.SceneLoader
         {
             if (sceneName == SceneManager.GetActiveScene().name)
             {
-                yield break;
+                AsyncOperation unloadSceneAsync = SceneManager.UnloadSceneAsync(sceneName);
+
+                while (!unloadSceneAsync.isDone)
+                {
+                    yield return null;
+                }
             }
 
             AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(sceneName);

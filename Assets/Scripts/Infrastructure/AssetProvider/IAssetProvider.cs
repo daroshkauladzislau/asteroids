@@ -10,5 +10,6 @@ namespace Infrastructure.AssetProvider
         GameObject BulletObject();
         GameObject BigMeteorObject();
         GameObject SmallMeteorObject();
+        GameObject LaserObject();
     }
 }

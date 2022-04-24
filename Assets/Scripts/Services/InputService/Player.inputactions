@@ -22,9 +22,17 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Fire",
+                    "name": "FireStandard",
                     "type": "Button",
                     "id": "e4a882b3-962a-45ff-b50b-86ed5a003673",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "FireLaser",
+                    "type": "Button",
+                    "id": "0f6b8293-6d98-480f-8777-d86d88c9e045",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -93,7 +101,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Fire",
+                    "action": "FireStandard",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "489f2920-60b4-440a-877f-1683bcd3f6ea",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FireLaser",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

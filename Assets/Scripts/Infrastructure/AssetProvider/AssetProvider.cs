@@ -4,6 +4,7 @@ namespace Infrastructure.AssetProvider
 {
     public class AssetProvider : IAssetProvider
     {
+        private const string LaserPrefabPath = "Prefabs/Game/Laser";
         private const string BigMeteorPrefabPath = "Prefabs/Game/BigMeteor";
         private const string PlayerShipPrefabPath = "Prefabs/Game/PlayerShip";
         private const string BulletPrefabPath = "Prefabs/Game/StandardBullet";
@@ -20,5 +21,8 @@ namespace Infrastructure.AssetProvider
 
         public GameObject SmallMeteorObject() => 
             Resources.Load<GameObject>(SmallMeteorObjectPath);
+
+        public GameObject LaserObject() => 
+            Resources.Load<GameObject>(LaserPrefabPath);
     }
 }

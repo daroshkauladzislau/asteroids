@@ -8,12 +8,16 @@ namespace Infrastructure.ConfigProvider
         private const string StandardBulletConfigPath = "Configs/Game/Gun/StandardBullet/StandardBullet";
         private const string PlayerConfigPath = "Configs/Game/Player/PlayerConfig";
         private const string MeteorConfigPath = "Configs/Game/Meteor/Meteor";
+        private const string LaserConfigPath = "Configs/Game/Gun/Laser/Laser";
 
         public PlayerConfig PlayerConfig() => 
             Resources.Load<PlayerConfig>(PlayerConfigPath);
 
         public GunConfig StandardBulletConfig() => 
             Resources.Load<GunConfig>(StandardBulletConfigPath);
+
+        public GunConfig LaserBulletConfig() => 
+            Resources.Load<GunConfig>(LaserConfigPath);
 
         public MeteorConfig MeteorConfig() => 
             Resources.Load<MeteorConfig>(MeteorConfigPath);

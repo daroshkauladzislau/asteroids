@@ -1,4 +1,9 @@
 using Game.Bullets;
+using Game.Bullets.BaseBullet.Collide;
+using Game.Bullets.BaseBullet.Move;
+using Game.Bullets.Laser.Collide;
+using Game.Bullets.Laser.Move;
+using Game.Bullets.StandardBullet.Collide;
 using Game.Bullets.StandardBullet.Move;
 using Game.Meteors.BaseMeteor.MeteorCollide;
 using Game.Meteors.BaseMeteor.MeteorMove;
@@ -47,9 +52,31 @@ namespace Infrastructure.Factory.GameFactory
             GameObject bulletPrefab = Object.Instantiate(_assetProvider.BulletObject(), position, rotation);
 
             BaseBulletMoveModel bulletModel = new StandardBulletMoveModel(gunConfig.Speed);
-            BaseBulletMove bulletComponent = bulletPrefab.GetComponent<StandardBulletMove>();
-            BulletController bulletController =
-                new BulletController(bulletModel, bulletComponent, _screenLimits);
+            BaseBulletMove bulletComponent = bulletPrefab.GetComponent<BaseBulletMove>();
+            BaseBulletMoveController standardBulletMoveController =
+                new StandardBulletMoveController(bulletModel, bulletComponent, _screenLimits);
+
+            BaseBulletCollide baseBulletCollide = bulletPrefab.GetComponent<BaseBulletCollide>();
+            BaseBulletCollideController baseBulletCollideController =
+                new StandardBulletCollideController(baseBulletCollide);
+            
+            return bulletPrefab;
+        }
+
+        public GameObject CreateLaserBullet(Vector3 position, Quaternion rotation)
+        {
+            GunConfig gunConfig = _configProvider.LaserBulletConfig();
+            GameObject bulletPrefab = Object.Instantiate(_assetProvider.LaserObject(), position, rotation);
+
+            BaseBulletMoveModel bulletModel = new LaserMoveModel(gunConfig.Speed);
+            BaseBulletMove bulletComponent = bulletPrefab.GetComponent<BaseBulletMove>();
+            BaseBulletMoveController laserMoveController =
+                new StandardBulletMoveController(bulletModel, bulletComponent, _screenLimits);
+
+            BaseBulletCollide baseBulletCollide = bulletPrefab.GetComponent<BaseBulletCollide>();
+            BaseBulletCollideController baseBulletCollideController =
+                new LaserCollideController(baseBulletCollide);
+            
             return bulletPrefab;
         }
 
@@ -92,7 +119,8 @@ namespace Infrastructure.Factory.GameFactory
             PlayerShootModel playerShootModel = new PlayerShootModel(0.0f, 0.0f);
             PlayerShoot playerShootComponent = playerShip.GetComponent<PlayerShoot>();
             PlayerShootController playerShootController =
-                new PlayerShootController(playerShootModel, playerShootComponent, _inputService, this);
+                new PlayerShootController(playerShootModel, playerShootComponent, _inputService, this,
+                    playerConfig.LaserDelay, playerConfig.StandardBulletDelay);
         }
 
         private void ConfigurePlayerRotate(GameObject playerShip, PlayerConfig playerConfig)

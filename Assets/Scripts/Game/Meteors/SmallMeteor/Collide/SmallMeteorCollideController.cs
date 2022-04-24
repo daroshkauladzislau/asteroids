@@ -18,11 +18,7 @@ namespace Game.Meteors.SmallMeteor.Collide
 
         private void OnMeteorCollision(Collider2D obj)
         {
-            if (obj.gameObject.TryGetComponent(out StandardBulletMove bullet))
-            {
-                bullet.gameObject.SetActive(false);
-                MeteorCollide.gameObject.SetActive(false);
-            }
+            
         }
     }
 }
